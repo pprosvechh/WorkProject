@@ -29,71 +29,90 @@ public class SitePage {
      * определение локатора поля First Name
      */
     @FindBy(xpath = "//*[contains(@id, 'firstName')]")
-
     private WebElement firstNameField;
     /**
      * определение локатора поля Last Name
      */
     @FindBy(xpath = "//*[contains(@id, 'lastName')]")
-
     private WebElement lastNameField;
 
     /**
      * определение локатора поля Email
      */
     @FindBy(xpath = "//*[contains(@placeholder, 'name@example.com')]")
-
     private WebElement userEmail;
 
     /**
      * определение локатора поля Mobile
      */
     @FindBy(xpath = "//input[@id=\"userNumber\"]")
-
     private WebElement userNumber;
     /**
      * определение локатора поля Subjects
      */
     @FindBy(xpath = "//*[@id=\"subjectsInput\"]")
-
     private WebElement subjects;
 
     /**
      * определение локатора поля Current Address
      */
     @FindBy(xpath = "//*[@id=\"currentAddress\"]")
-
     private WebElement currentAddress;
     /**
      * определение локатора поля Select State
      */
     @FindBy(xpath = "//*[@id=\"state\"]//div[@class=\" css-yk16xz-control\"]")
-
     private WebElement selectState;
     /**
      * определение локатора поля Select City
      */
     @FindBy(xpath = "//*[@id=\"city\"]//div[@class=\" css-yk16xz-control\"]")
-
     private WebElement selectCity;
     /**
      * определение локатора выпадающего поля выбора даты рождения
      */
     @FindBy(xpath = "//*[@id=\"dateOfBirthInput\"]")
-
     private WebElement dateOfBirth;
     /**
      * определение локатора кнопки Выберите файл
      */
     @FindBy(xpath = "//input[@class=\"form-control-file\"]")
-
     private WebElement loadButton;
     /**
      * определение локатора кнопки Submit
      */
     @FindBy(xpath = "//*[@id=\"submit\"]")
-
     private WebElement submit;
+    /**
+     * определение локатора дней для выбора даты рождения
+     */
+    @FindBy(xpath = "//div[@class=\"react-datepicker__month-container\"]")
+    private List<WebElement> days;
+    /**
+     * определение локатора месяцев для выбора даты рождения
+     */
+    @FindBy(xpath = "//select[@class=\"react-datepicker__month-select\"]/option")
+    private List<WebElement> months;
+    /**
+     * определение локатора годов для выбора даты рождения
+     */
+    @FindBy(xpath = "//select[@class=\"react-datepicker__year-select\"]/option")
+    private List<WebElement> years;
+    /**
+     * определение локатора городов для поля Select City
+     */
+    @FindBy(xpath = "//*[@id=\"city\"]//div[@class=\" css-26l3qy-menu\"]")
+    private List<WebElement> cities;
+    /**
+     * определение локатора стран для поля Select State
+     */
+    @FindBy(xpath = "//*[@id=\"state\"]//div[@class=\" css-26l3qy-menu\"]")
+    private List<WebElement> states;
+    /**
+     * определение локатора для переключателя Gender
+     */
+    @FindBy(xpath = "//*[@id=\"genterWrapper\"]/div[2]//label")
+    private List<WebElement> genders;
 
     /**
      * метод ввода First Name (10 букв и/или цифр)
@@ -123,11 +142,10 @@ public class SitePage {
      * метод выбора случайного переключателя Gender
      */
     public SitePage randomClickGender() {
-        List<WebElement> Genders = driver.findElements(By.xpath("//*[@id=\"genterWrapper\"]/div[2]//label"));
-        int indexOfRandomGender = new Random().ints(0, Genders.size())
+        int indexOfRandomGender = new Random().ints(0, genders.size())
                 .findFirst()
                 .getAsInt();
-        Genders.get(indexOfRandomGender).click();
+        genders.get(indexOfRandomGender).click();
         return this;
     }
 
@@ -151,11 +169,10 @@ public class SitePage {
      * метод выбора месяца даты рождения
      */
     public SitePage randomClickMonth() {
-        List<WebElement> Months = driver.findElements(By.xpath("//select[@class=\"react-datepicker__month-select\"]/option"));
-        int indexOfRandomMonth = new Random().ints(0, Months.size())
+        int indexOfRandomMonth = new Random().ints(0, months.size())
                 .findFirst()
                 .getAsInt();
-        Months.get(indexOfRandomMonth).click();
+        months.get(indexOfRandomMonth).click();
         return this;
     }
 
@@ -163,11 +180,10 @@ public class SitePage {
      * метод выбора года даты рождения
      */
     public SitePage randomClickYear() {
-        List<WebElement> Years = driver.findElements(By.xpath("//select[@class=\"react-datepicker__year-select\"]/option"));
-        int indexOfRandomYear = new Random().ints(0, Years.size())
+        int indexOfRandomYear = new Random().ints(0, years.size())
                 .findFirst()
                 .getAsInt();
-        Years.get(indexOfRandomYear).click();
+        years.get(indexOfRandomYear).click();
         return this;
     }
 
@@ -175,11 +191,10 @@ public class SitePage {
      * метод выбора дня даты рождения
      */
     public SitePage randomClickDay() {
-        List<WebElement> Days = driver.findElements(By.xpath("//div[@class=\"react-datepicker__month-container\"]"));
-        int indexOfRandomDay = new Random().ints(0, Days.size())
+        int indexOfRandomDay = new Random().ints(0, days.size())
                 .findFirst()
                 .getAsInt();
-        Days.get(indexOfRandomDay).click();
+        days.get(indexOfRandomDay).click();
         return this;
     }
 
@@ -212,14 +227,13 @@ public class SitePage {
      * метод выбора значения Select State
      */
     public SitePage randomClickState() {
-        //скролл страницы книз до видимости поля Select State
+        //скролл страницы вниз до видимости поля Select State
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", selectState);
         selectState.click();
-        List<WebElement> States = driver.findElements(By.xpath("//*[@id=\"state\"]//div[@class=\" css-26l3qy-menu\"]"));
-        int indexOfRandomState = new Random().ints(0, States.size())
+        int indexOfRandomState = new Random().ints(0, states.size())
                 .findFirst()
                 .getAsInt();
-        States.get(indexOfRandomState).click();
+        states.get(indexOfRandomState).click();
         return this;
     }
 
@@ -227,14 +241,13 @@ public class SitePage {
      * метод выбора значения Select City
      */
     public SitePage randomClickCity() {
-        //скролл страницы книз до видимости поля Select City
+        //скролл страницы вниз до видимости поля Select City
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", selectCity);
         selectCity.click();
-        List<WebElement> Cities = driver.findElements(By.xpath("//*[@id=\"city\"]//div[@class=\" css-26l3qy-menu\"]"));
-        int indexOfRandomCity = new Random().ints(0, Cities.size())
+        int indexOfRandomCity = new Random().ints(0, cities.size())
                 .findFirst()
                 .getAsInt();
-        Cities.get(indexOfRandomCity).click();
+        cities.get(indexOfRandomCity).click();
         return this;
     }
 

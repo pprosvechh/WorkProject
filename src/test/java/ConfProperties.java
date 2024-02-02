@@ -3,14 +3,14 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfProperties {
-    protected static FileInputStream fileInputStream;
-    protected static Properties PROPERTIES;
+    public static FileInputStream fileInputStream;
+    public static Properties properties;
     static {
         try {
             //указание пути до файла с настройками
             fileInputStream = new FileInputStream("src/test/resources/conf.properties");
-            PROPERTIES = new Properties();
-            PROPERTIES.load(fileInputStream);
+            properties = new Properties();
+            properties.load(fileInputStream);
         } catch (IOException e) {
             e.printStackTrace();
             //обработка возможного исключения (нет файла и т.п.)
@@ -24,7 +24,7 @@ public class ConfProperties {
      * метод для возврата строки со значением из файла с настройками
      */
     public static String getProperty(String key) {
-        return PROPERTIES.getProperty(key); }
+        return properties.getProperty(key); }
 }
 
 
