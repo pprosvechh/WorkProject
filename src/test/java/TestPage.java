@@ -12,6 +12,7 @@ import java.time.Duration;
 
 public class TestPage {
     public static SitePage sitePage;
+    public static JsHelper jsHelper;
     public static WebDriver driver;
 
     /**
@@ -24,6 +25,7 @@ public class TestPage {
         driver = new ChromeDriver();
         ChromeDriverManager.getInstance().setup();
         sitePage = new SitePage(driver);
+        jsHelper = new JsHelper(driver);
         //окно разворачивается на полный экран
         driver.manage().window().maximize();
         //задержка на выполнение теста = 5 сек.
@@ -36,7 +38,7 @@ public class TestPage {
     @Test
     @Owner("Alexander L.")
     @Description("Filling out the registration form")
-    public void Test() throws AWTException {
+    public void Test() throws AWTException, InterruptedException {
         //выполнение шага 1
         sitePage.enterFirstNameField();
         //выполнение шага 2
@@ -59,11 +61,12 @@ public class TestPage {
         //выполнение шага 9
         sitePage.enterCurrentAddress();
         //выполнение шага 10
-        sitePage.randomClickState();
+        jsHelper.randomClickState();
         //выполнение шага 11
-        sitePage.randomClickCity();
+        jsHelper.randomClickCity();
         //выполнение шага 12
-        sitePage.clickSubmit();
+        jsHelper.clickSubmit();
+        Thread.sleep(2000);
     }
 
     @AfterAll
@@ -72,6 +75,3 @@ public class TestPage {
         driver.quit();
     }
 }
-
-
-
