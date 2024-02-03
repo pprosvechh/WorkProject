@@ -1,3 +1,4 @@
+import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.AfterAll;
@@ -19,10 +20,9 @@ public class TestPage {
     @BeforeAll
     public static void setup() {
         System.setProperty("webdriver.http.factory", "jdk-http-client");
-        //определение пути до драйвера и его настройка
-        System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriver"));
         //создание экземпляра драйвера
         driver = new ChromeDriver();
+        ChromeDriverManager.getInstance().setup();
         sitePage = new SitePage(driver);
         //окно разворачивается на полный экран
         driver.manage().window().maximize();

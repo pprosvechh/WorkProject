@@ -28,35 +28,35 @@ public class SitePage {
     /**
      * определение локатора поля First Name
      */
-    @FindBy(xpath = "//*[contains(@id, 'firstName')]")
+    @FindBy(css = "#firstName")
     private WebElement firstNameField;
     /**
      * определение локатора поля Last Name
      */
-    @FindBy(xpath = "//*[contains(@id, 'lastName')]")
+    @FindBy(css = "#lastName")
     private WebElement lastNameField;
 
     /**
      * определение локатора поля Email
      */
-    @FindBy(xpath = "//*[contains(@placeholder, 'name@example.com')]")
+    @FindBy(css = "#userEmail")
     private WebElement userEmail;
 
     /**
      * определение локатора поля Mobile
      */
-    @FindBy(xpath = "//input[@id=\"userNumber\"]")
+    @FindBy(id = "userNumber")
     private WebElement userNumber;
     /**
      * определение локатора поля Subjects
      */
-    @FindBy(xpath = "//*[@id=\"subjectsInput\"]")
+    @FindBy(id = "subjectsInput")
     private WebElement subjects;
 
     /**
      * определение локатора поля Current Address
      */
-    @FindBy(xpath = "//*[@id=\"currentAddress\"]")
+    @FindBy(id = "currentAddress")
     private WebElement currentAddress;
     /**
      * определение локатора поля Select State
@@ -71,17 +71,17 @@ public class SitePage {
     /**
      * определение локатора выпадающего поля выбора даты рождения
      */
-    @FindBy(xpath = "//*[@id=\"dateOfBirthInput\"]")
+    @FindBy(id = "dateOfBirthInput")
     private WebElement dateOfBirth;
     /**
      * определение локатора кнопки Выберите файл
      */
-    @FindBy(xpath = "//input[@class=\"form-control-file\"]")
+    @FindBy(css = "#uploadPicture")
     private WebElement loadButton;
     /**
      * определение локатора кнопки Submit
      */
-    @FindBy(xpath = "//*[@id=\"submit\"]")
+    @FindBy(id = "submit")
     private WebElement submit;
     /**
      * определение локатора дней для выбора даты рождения
