@@ -1,0 +1,13 @@
+При прохождении тест-кейса выяснились следующие особенности, которые повлияли на проверки теста:
+1. Итоговые табличные значения некоторых выбранных полей (в проекте это nameValue, emailValue, genderValue,
+ mobileValue, dateOfBirthValue, pictureNameValue, currentAddressValue) в DOM страницы
+ https://demoqa.com/automation-practice-form отображаются в единственном числе, поэтому они проверялись на
+ отсутствие пустых значений.
+2. В итоговой таблице значение поля Subjects не сохраняется (пустое поле строки Subjects столбца Values в таблице,
+ в проекте это subjectsValue), поэтому поле subjectsValue проверялось на отсутствие пустого значения.
+3. В итоговой таблице значение поля Hobbies не выбиралось  (не было в шагах тест-кейса, пустое поле строки
+Hobbies столбца Values в таблице, в проекте это hobbiesValue), поэтому поле hobbiesValue проверялось на
+отсутствие пустого значения.
+4. Из поля state не выводится текст методом getText() (тоже самое с полем city), поэтому поле stateAndCityValue
+проверялось с использованием Assertions.assertNotEquals (а не Assertions.assertEquals).
+5. Поля close, state, city не были использованы в проверках (оставлены в проекте).

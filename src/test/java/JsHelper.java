@@ -1,7 +1,6 @@
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-import java.awt.*;
 import java.time.Duration;
 import java.util.Random;
 

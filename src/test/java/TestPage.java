@@ -1,13 +1,12 @@
-import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.awt.*;
 import java.time.Duration;
 
 public class TestPage {
@@ -21,9 +20,10 @@ public class TestPage {
     @BeforeAll
     public static void setup() {
         System.setProperty("webdriver.http.factory", "jdk-http-client");
+        //определение пути до драйвера и его настройка
+        System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriver"));
         //создание экземпляра драйвера
         driver = new ChromeDriver();
-        ChromeDriverManager.getInstance().setup();
         sitePage = new SitePage(driver);
         jsHelper = new JsHelper(driver);
         //окно разворачивается на полный экран
@@ -38,7 +38,7 @@ public class TestPage {
     @Test
     @Owner("Alexander L.")
     @Description("Filling out the registration form")
-    public void Test() throws AWTException, InterruptedException {
+    public void Test() {
         //выполнение шага 1
         sitePage.enterFirstNameField();
         //выполнение шага 2
@@ -66,7 +66,28 @@ public class TestPage {
         jsHelper.randomClickCity();
         //выполнение шага 12
         jsHelper.clickSubmit();
-        Thread.sleep(2000);
+        //Проверка названия заголовка всплывающего окна
+        Assertions.assertEquals(sitePage.modalExample.getText(), "Thanks for submitting the form");
+        //Проверка табличного значения выбранного First Name и Last Name
+        Assertions.assertNotEquals(sitePage.nameValue.getText(), null);
+        //Проверка табличного значения выбранного Email
+        Assertions.assertNotEquals(sitePage.emailValue.getText(), null);
+        //Проверка табличного значения выбранного Gender
+        Assertions.assertNotNull(sitePage.genderValue.getText());
+        //Проверка табличного значения выбранного Mobile
+        Assertions.assertNotEquals(sitePage.mobileValue.getText(), null);
+        //Проверка табличного значения выбранной даты рождения
+        Assertions.assertNotEquals(sitePage.dateOfBirthValue.getText(), null);
+        //Проверка табличного значения выбранного Subjects
+        Assertions.assertNotNull(sitePage.subjectsValue.getText());
+        //Проверка табличного значения выбранного Hobbies (его в тесте не выбирали)
+        Assertions.assertNotEquals(sitePage.hobbiesValue.getText(), null);
+        //Проверка табличного значения имени загружаемого файла с расширением
+        Assertions.assertNotEquals(sitePage.pictureNameValue.getText(), null);
+        //Проверка табличного значения выбранного зCurrent Address
+        Assertions.assertNotEquals(sitePage.currentAddressValue.getText(), null);
+        //Проверка табличных значений выбранной страны и выбранного города
+        Assertions.assertNotEquals(sitePage.stateAndCityValue.getText(), null);
     }
 
     @AfterAll
