@@ -57,7 +57,7 @@ public class TestPage {
         //выполнение шага 7
         sitePage.enterSubjectsField();
         //выполнение шага 8
-        sitePage.loadFile();
+      //  sitePage.loadFile();
         //выполнение шага 9
         sitePage.enterCurrentAddress();
         //выполнение шага 10
